@@ -90,5 +90,3 @@ if st.button("Fetch Recommendations"):
             st.error(f"Error fetching data: {e}")
     else:
         st.warning("Please fill in all required fields.")
-
-    
