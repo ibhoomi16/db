@@ -9,7 +9,7 @@ def connect_to_mongo(db_url, db_name, collection_name):
     """
     Connect to MongoDB and return the collection.
     """
-    client = MongoClient(db_url)
+    client = MongoClient(db_url = "mongodb://localhost:27017")
     db = client[db_name]
     return db[collection_name]
 
