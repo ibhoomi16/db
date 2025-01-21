@@ -23,12 +23,13 @@ def fetch_recommendations_from_mongo(collection, job_id):
         documents = collection.find({"job_id": job_id})
         recommendations = []
         for document in documents:
-            for rec in document.get("recommendations", []):
-                recommendations.append({
-                    "recommendation_content": rec.get("recommendation_content", "").strip(),
-                    "rating": rec.get("loe", "").strip(),
-                    "recommendation_class": rec.get("cor", "").strip()
-                })
+            if 'recommendations' in document:  # Ensure the recommendations field exists
+                for rec in document['recommendations']:
+                    recommendations.append({
+                        "recommendation_content": rec.get("recommendation_content", "").strip(),
+                        "rating": rec.get("loe", "").strip(),
+                        "recommendation_class": rec.get("cor", "").strip()
+                    })
         return recommendations
     except Exception as e:
         raise Exception(f"Error fetching recommendations: {e}")
@@ -71,7 +72,7 @@ st.title("Recommendations Fetcher with MongoDB Integration")
 
 # MongoDB Configuration Inputs
 st.header("MongoDB Configuration")
-db_url = st.text_input("MongoDB URL", "mongodb://localhost:27017")
+db_url = st.text_input("MongoDB URL", "mongodb://localhost:27017")  # Default localhost URL
 db_name = st.text_input("Database Name", "document-parsing")
 collection_name = st.text_input("Collection Name", "dps_data")
 
