@@ -9,7 +9,7 @@ def connect_to_mongo(db_url, db_name, collection_name):
     """
     Connect to MongoDB and return the collection.
     """
-    client = MongoClient(db_url = "mongodb://localhost:27017")
+    client = MongoClient(db_url)  # Pass db_url directly to MongoClient
     db = client[db_name]
     return db[collection_name]
 
@@ -90,7 +90,7 @@ st.title("Markdown to JSON with MongoDB Integration")
 
 # MongoDB Configuration Inputs
 st.header("MongoDB Configuration")
-db_url = st.text_input("MongoDB URL", "mongodb://localhost:27017")
+db_url = st.text_input("MongoDB URL", "mongodb://localhost:27017")  # Default value of URL
 db_name = st.text_input("Database Name", "document-parsing")
 collection_name = st.text_input("Collection Name", "dps_data")
 
@@ -146,4 +146,3 @@ if st.button("Process Data"):
             st.error(f"Error processing data: {e}")
     else:
         st.warning("Please fill in all required fields and upload a Markdown file.")
-
