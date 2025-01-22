@@ -2,7 +2,6 @@ import streamlit as st
 from pymongo import MongoClient
 import json
 
-# Function to connect to MongoDB
 def connect_to_mongo(db_url, db_name, collection_name):
     """
     Connect to MongoDB and return the collection.
@@ -14,7 +13,7 @@ def connect_to_mongo(db_url, db_name, collection_name):
     except Exception as e:
         raise Exception(f"Error connecting to MongoDB: {e}")
 
-# Function to fetch recommendations from MongoDB based on job ID
+
 def fetch_recommendations_from_mongo(collection, job_id):
     """
     Fetch recommendations and related data from MongoDB collection using the provided job ID.
@@ -34,7 +33,7 @@ def fetch_recommendations_from_mongo(collection, job_id):
     except Exception as e:
         raise Exception(f"Error fetching recommendations: {e}")
 
-# Function to generate JSON chunks
+
 def generate_json_chunks(recommendations, title, stage, disease, specialty, job_id, fetched_data):
     """
     Generate JSON chunks using the extracted recommendations, user inputs, and MongoDB data.
@@ -67,7 +66,7 @@ def generate_json_chunks(recommendations, title, stage, disease, specialty, job_
     except Exception as e:
         raise Exception(f"Error generating JSON chunks: {e}")
 
-# Streamlit app
+
 st.title("Recommendations Fetcher with MongoDB Integration")
 
 # MongoDB Configuration Inputs
